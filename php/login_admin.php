@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
+            $_SESSION['id'] = $id;
             header("Location: ../html/adminpage/employer_list.php");
         } else {
             echo "Invalid password.";

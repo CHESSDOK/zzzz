@@ -3,7 +3,7 @@ include 'conn_db.php';
 session_start();
 $admin = $_SESSION['username'];
 // Fetch all employers
-$sql = "SELECT * FROM empyers";
+$sql = "SELECT * FROM courses";
 $result = $conn->query($sql);
 
 ?>
@@ -17,8 +17,8 @@ $result = $conn->query($sql);
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>course</th>
+            <th>desc</th>
             <th>Actions</th>
         </tr>
         <?php
@@ -26,9 +26,9 @@ $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row["id"] . "</td>
-                        <td>" . $row["Fname"] . "</td>
-                        <td>" . $row["Lname"] . "</td>
-                        <td><a href='employer_docs_list.php?user_id=" . $row["id"] . "'>View Documents</a></td>
+                        <td>" . $row["course_name"] . "</td>
+                        <td>" . $row["description"] . "</td>
+                        <td><a href='upload_modules.php?user_id=" . $row["id"] . "'>uploadules</a></td>
                     </tr>";
             }
         } else {
@@ -39,6 +39,5 @@ $result = $conn->query($sql);
     </table>
 
     <a href="course.html?username=<?php echo $admin; ?>">courses</a>
-    <a href="course_list.php">course list</a>
 </body>
 </html>
