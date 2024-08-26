@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 22, 2024 at 04:52 AM
+-- Generation Time: Aug 26, 2024 at 11:49 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin_profile` (
 --
 
 INSERT INTO `admin_profile` (`id`, `username`, `password`, `email`, `admin_level`) VALUES
-(1, 'ict1mercado.cdlb@gmail.com', '$2y$10$rmxHBXRqiNPJ1OPDwEBreuxUNKzxDPITaaU7N6weUT0PQWpQ9wE0u', '1@gmailk', NULL);
+(1, 'ict1mercado.cdlb@gmail.com', '$2y$10$rmxHBXRqiNPJ1OPDwEBreuxUNKzxDPITaaU7N6weUT0PQWpQ9wE0u', '1@gmailk', NULL),
+(2, 'admin', '$2y$10$6JmTdgaYp3NP4WUC5epOYuwrVAL2phUWQEvQ1aC28agka.7n3WKuO', 'mercadomarklawrence55@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -98,8 +99,16 @@ CREATE TABLE `courses` (
   `id` int NOT NULL,
   `course_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
-  `user_id` int NOT NULL
+  `module_count` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`) VALUES
+(2, 'gaming', 'playing like a pro', 3),
+(3, 'hunter', 'entering dungeons', 2);
 
 -- --------------------------------------------------------
 
@@ -211,9 +220,40 @@ CREATE TABLE `learners_profile` (
 CREATE TABLE `modules` (
   `id` int NOT NULL,
   `course_id` int DEFAULT NULL,
-  `module_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci
+  `module_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `modules`
+--
+
+INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
+(1, 2, 'aaaaaaaaaa1'),
+(2, 2, '1111111111111111aa'),
+(3, 2, 'aa11a1a1a1a1a1a1a1'),
+(4, 3, 'cccccccccccc'),
+(5, 3, 'bbbbbbbbbbbbb');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `module_content`
+--
+
+CREATE TABLE `module_content` (
+  `id` int NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `modules_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `module_content`
+--
+
+INSERT INTO `module_content` (`id`, `description`, `video`, `file_path`, `modules_id`) VALUES
+(1, 'sdfasdfasd', 'https://www.youtube.com/watch?v=ahHiepqCDK8', 'uploads/2.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -323,6 +363,12 @@ ALTER TABLE `modules`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `module_content`
+--
+ALTER TABLE `module_content`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `quizzes`
 --
 ALTER TABLE `quizzes`
@@ -342,7 +388,7 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicant_profile`
@@ -360,7 +406,7 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employer_documents`
@@ -396,7 +442,13 @@ ALTER TABLE `learners_profile`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `module_content`
+--
+ALTER TABLE `module_content`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
