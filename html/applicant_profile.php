@@ -1,9 +1,21 @@
 <?php
 include '../php/conn_db.php';
+function checkSession() {
+    session_start(); // Start the session
 
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: html/login_employer.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+
+$user_id = checkSession();
 // Get user_id from URL
-$user_id = intval($_GET['user_id']);
-
 // Fetch documents for the selected employer
 $sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);

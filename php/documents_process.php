@@ -1,8 +1,23 @@
 <?php
 include 'conn_db.php'; // Update the path if needed
-session_start();
+function checkSession() {
+    session_start(); // Start the session
 
-$user = $_SESSION['id']; // Assume you store the user_id in session after login
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        echo "<script type='text/javascript'>
+        alert('User not found');
+        window.location.href='../html/login_employer.html';
+      </script>";
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+
+$user = checkSession();
 
 $sql = "SELECT user_id FROM employer_profile WHERE user_id = '$user'";
 $result = $conn->query($sql);

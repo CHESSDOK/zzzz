@@ -57,8 +57,22 @@ if (!$row) {
             <li><a href="html/contact.html">Contact</a></li>
         </ul>
         <div class="auth">
-        <button id ="">  <?php echo htmlspecialchars($row['Fname']); ?> </button>
+        <button id ="emprof">  <?php echo htmlspecialchars($row['Fname']); ?> </button>
         </div>
     </nav>
+
+    <script>
+    document.getElementById("emprof").addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent default link behavior
+
+      // Change the URL after the transition ends
+      setTimeout(function () {
+        window.location.href = "html/approf.php";
+      }, 300); // Adjust the delay according to your transition duration
+
+      // Adding the class to initiate the fade-in and slide-up animation
+      document.body.classList.add('fade-in');
+    });
+  </script> 
 </body>
 </html>
